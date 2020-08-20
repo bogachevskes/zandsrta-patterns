@@ -65,4 +65,27 @@ use App\ServiceLocator\AppLocator;
 
 $app = new AppLocator;
 
-echo $app->preferences->printPropertyValue('max-connections');
+echo $app->preferences->printPropertyValue('max-connections') . "<br>";
+
+/*
+|--------------------------------------------------------------------------
+| Dependency injection
+|--------------------------------------------------------------------------
+| Внедрение зависимости (англ. Dependency injection, DI) — процесс предоставления внешней зависимости программному компоненту.
+| Является специфичной формой «инверсии управления» (англ. Inversion of control, IoC), когда она применяется к управлению зависимостями.
+| В полном соответствии с принципом единственной обязанности объект отдаёт заботу о построении требуемых ему зависимостей внешнему,
+| специально предназначенному для этого общему механизму.
+*/
+
+use App\DependencyInjection\PreferencesRepository;
+use App\DependencyInjection\Models\Preferences as PreferencesInjection;
+
+$repository = new PreferencesRepository(
+        PreferencesInjection::getInstance()
+    );
+
+$preferencesRepository = $repository->getRepository();
+
+$preferencesRepository->setProperty('max-connections', 9);
+
+echo $preferencesRepository->printPropertyValue('max-connections') . "<br>";

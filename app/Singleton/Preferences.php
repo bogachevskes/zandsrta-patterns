@@ -4,13 +4,13 @@ namespace App\Singleton;
 
 class Preferences
 {
-    private $props = [];
+    protected array $props = [];
 
-    private static $instance;
+    protected static $instance;
 
-    private function __construct()
+    protected function __construct()
     {
-
+        //
     }
 
     public static function getInstance(): self
@@ -38,7 +38,7 @@ class Preferences
         return $this->props[$key];
     }
 
-    public function printPropertyValue(string $key)
+    public function printPropertyValue(string $key): string
     {
         return 'Значение параметра ' . $key . ' - ' . $this->getProperty($key);
     }
