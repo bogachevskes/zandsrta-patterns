@@ -4,7 +4,7 @@ namespace App\Singleton;
 
 class Preferences
 {
-    protected array $props = [];
+    protected $props = [];
 
     protected static $instance;
 
@@ -13,7 +13,12 @@ class Preferences
         //
     }
 
-    public static function getInstance(): self
+    /**
+     * нет возможности типизировать вывод,
+     * т.к. php7.1, не корреткно понимает :self
+     * в дочернем классе при наследовании.
+     */
+    public static function getInstance()
     {
         if (self::$instance instanceof self) {
             return self::$instance;

@@ -6,7 +6,7 @@ use App\DependencyInjection\Base\ConfigurableInstance;
 
 class PreferencesRepository
 {
-    protected ConfigurableInstance $repository;
+    protected $repository;
     
     public function __construct(ConfigurableInstance $repository)
     {
