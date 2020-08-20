@@ -2,7 +2,9 @@
 
 namespace App\Singleton;
 
-class Preferences
+use App\Singleton\Base\BasePreferences;
+
+class Preferences implements BasePreferences
 {
     protected $props = [];
 
@@ -13,14 +15,9 @@ class Preferences
         //
     }
 
-    /**
-     * нет возможности типизировать вывод,
-     * т.к. php7.1, не корреткно понимает :self
-     * в дочернем классе при наследовании.
-     */
-    public static function getInstance()
+    public static function getInstance(): BasePreferences
     {
-        if (self::$instance instanceof self) {
+        if (self::$instance instanceof BasePreferences) {
             return self::$instance;
         }
 
