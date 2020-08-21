@@ -89,3 +89,30 @@ $preferencesRepository = $repository->getRepository();
 $preferencesRepository->setProperty('max-connections', 9);
 
 echo $preferencesRepository->printPropertyValue('max-connections') . "<br>";
+
+/*
+|--------------------------------------------------------------------------
+| Decorator
+|--------------------------------------------------------------------------
+| Декоратор (англ. Decorator) — структурный шаблон проектирования,
+| предназначенный для динамического подключения дополнительного поведения к объекту.
+| Шаблон Декоратор предоставляет гибкую альтернативу практике создания подклассов с целью расширения функциональности.
+*/
+
+use App\Decorator\Helpers\RequestHelper;
+use App\Decorator\Middleware\LogRequest;
+use App\Decorator\Middleware\AuthenticateRequest;
+use App\Decorator\Middleware\StructureRequest;
+use App\Decorator\MainProcess;
+
+$process = new LogRequest(
+        new AuthenticateRequest(
+                new StructureRequest(
+                        new MainProcess()
+                    )
+            )
+    );
+
+$process->process(
+        new RequestHelper()
+    );
