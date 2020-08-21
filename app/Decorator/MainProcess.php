@@ -9,7 +9,7 @@ class MainProcess extends ProcessRequest
 {
     public function process(RequestHelper $request): void
     {
-        // Обработка.
+        $this->printInfo();
     }
 
     protected function getInfo(): string

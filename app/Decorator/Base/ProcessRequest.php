@@ -6,8 +6,6 @@ use App\Decorator\Helpers\RequestHelper;
 
 abstract class ProcessRequest
 {
-
-    
     abstract public function process(RequestHelper $request): void;
 
     abstract protected function getInfo(): string;
