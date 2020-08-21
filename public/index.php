@@ -92,6 +92,37 @@ echo $preferencesRepository->printPropertyValue('max-connections') . "<br>";
 
 /*
 |--------------------------------------------------------------------------
+| Composite pattern
+|--------------------------------------------------------------------------
+| Компоновщик (англ. Composite pattern) — структурный шаблон проектирования,
+| объединяющий объекты в древовидную структуру для представления иерархии от частного к целому.
+| Компоновщик позволяет клиентам обращаться к отдельным объектам и к группам объектов одинаково.
+*/
+
+use App\Composite\Chair;
+use App\Composite\ChairBox;
+
+$chairBox = new ChairBox();
+
+echo $chairBox->printWeight() . "<br>";
+
+$chairToRemove = new Chair(78);
+
+$chairBox->addUnits([
+        new Chair(15),
+        $chairToRemove,
+        new Chair(9),
+        new Chair(15),
+    ]);
+
+echo $chairBox->printWeight() . "<br>";
+
+$chairBox->removeUnit($chairToRemove);
+
+echo $chairBox->printWeight() . "<br>";
+
+/*
+|--------------------------------------------------------------------------
 | Decorator
 |--------------------------------------------------------------------------
 | Декоратор (англ. Decorator) — структурный шаблон проектирования,

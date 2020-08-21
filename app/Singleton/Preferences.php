@@ -2,9 +2,11 @@
 
 namespace App\Singleton;
 
-class Preferences
+use App\Singleton\Base\BasePreferences;
+
+class Preferences implements BasePreferences
 {
-    protected array $props = [];
+    protected $props = [];
 
     protected static $instance;
 
@@ -13,9 +15,9 @@ class Preferences
         //
     }
 
-    public static function getInstance(): self
+    public static function getInstance(): BasePreferences
     {
-        if (self::$instance instanceof self) {
+        if (self::$instance instanceof BasePreferences) {
             return self::$instance;
         }
 

@@ -4,8 +4,8 @@ namespace App\Strategy\Base;
 
 abstract class Lesson
 {
-    private int $duration;
-    private CostStrategy $costStrategy;
+    private $duration;
+    private $costStrategy;
 
     public function __construct(int $duration, CostStrategy $costStrategy)
     {
