@@ -6,17 +6,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
-| Facade
-|--------------------------------------------------------------------------
-| Шаблон фасад (англ. Facade) — структурный шаблон проектирования,
-| позволяющий скрыть сложность системы путём сведения всех возможных внешних вызовов к одному объекту,
-| делегирующему их соответствующим объектам системы.
-| 
-| Другими словами, любой из нижеописанных вызовов публичных методов классов объектов есть фасад.
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Strategy
 |--------------------------------------------------------------------------
 | Стратегия (англ. Strategy) — поведенческий шаблон проектирования,
@@ -31,6 +20,8 @@ use App\Strategy\Seminar;
 use App\Strategy\Lecture;
 use App\Strategy\TimedCostStrategy;
 use App\Strategy\FixedCostStrategy;
+
+echo '<b>Strategy</b><br>';
 
 $seminar = new Seminar(4, new TimedCostStrategy);
 $lecture = new Lecture(5, new FixedCostStrategy);
@@ -49,6 +40,8 @@ echo $lecture->printChargeType() . "<br>";
 | что в однопоточном приложении будет единственный экземпляр некоторого класса,
 | и предоставляющий глобальную точку доступа к этому экземпляру.
 */
+
+echo '<br><b>Singleton</b><br>';
 
 use App\Singleton\Preferences;
 
@@ -72,6 +65,8 @@ echo $params->printPropertyValue('max-connections') . "<br>";
 | необходимую для выполнения определенной задачи.
 */
 
+echo '<br><b>Service locator</b><br>';
+
 use App\ServiceLocator\AppLocator;
 
 $app = new AppLocator;
@@ -91,6 +86,8 @@ echo $app->preferences->printPropertyValue('max-connections') . "<br>";
 use App\DependencyInjection\PreferencesRepository;
 use App\DependencyInjection\Models\Preferences as PreferencesInjection;
 
+echo '<br><b>Dependency injection</b><br>';
+
 $repository = new PreferencesRepository(
         PreferencesInjection::getInstance()
     );
@@ -103,7 +100,7 @@ echo $preferencesRepository->printPropertyValue('max-connections') . "<br>";
 
 /*
 |--------------------------------------------------------------------------
-| Composite pattern
+| Composite
 |--------------------------------------------------------------------------
 | Компоновщик (англ. Composite pattern) — структурный шаблон проектирования,
 | объединяющий объекты в древовидную структуру для представления иерархии от частного к целому.
@@ -112,6 +109,8 @@ echo $preferencesRepository->printPropertyValue('max-connections') . "<br>";
 
 use App\Composite\Chair;
 use App\Composite\ChairBox;
+
+echo '<br><b>Composite</b><br>';
 
 $chairBox = new ChairBox();
 
@@ -147,6 +146,8 @@ use App\Decorator\Middleware\AuthenticateRequest;
 use App\Decorator\Middleware\StructureRequest;
 use App\Decorator\MainProcess;
 
+echo '<br><b>Decorator</b>';
+
 $process = new LogRequest(
         new AuthenticateRequest(
                 new StructureRequest(
@@ -158,3 +159,25 @@ $process = new LogRequest(
 $process->process(
         new RequestHelper()
     );
+
+/*
+|--------------------------------------------------------------------------
+| Facade
+|--------------------------------------------------------------------------
+| Шаблон фасад (англ. Facade) — структурный шаблон проектирования,
+| позволяющий скрыть сложность системы путём сведения всех возможных внешних вызовов к одному объекту,
+| делегирующему их соответствующим объектам системы.
+| 
+*/
+
+use App\Facade\{
+    Car,
+    Components\CarDriver,
+};
+
+echo '<br><b>Facade</b><br>';
+
+$carDriver = new \App\Facade\Components\CarDriver;
+$car = new \App\Facade\Car($carDriver, 70);
+
+$car->checkEngine();
