@@ -50,6 +50,6 @@ class Car
         }
         
 
-        echo 'Engine ready to start';
+        echo 'Engine ready to start<br>';
     }
 }

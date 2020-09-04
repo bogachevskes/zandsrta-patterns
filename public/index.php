@@ -181,3 +181,26 @@ $carDriver = new \App\Facade\Components\CarDriver;
 $car = new \App\Facade\Car($carDriver, 70);
 
 $car->checkEngine();
+
+/*
+|--------------------------------------------------------------------------
+| Observer
+|--------------------------------------------------------------------------
+| Наблюдатель (англ. Observer) — поведенческий шаблон проектирования.
+| Также известен как «подчинённые» (Dependents). Реализует у класса механизм,
+| который позволяет объекту этого класса получать оповещения об изменении
+| состояния других объектов и тем самым наблюдать за ними.
+*/
+
+use App\Observer\{
+    Loggin,
+    GeneralLogger,
+};
+
+echo '<br><b>Observer</b><br>';
+
+$login = new Loggin('username', 'password');
+new GeneralLogger($login);
+
+$login->handle();
+
