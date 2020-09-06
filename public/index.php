@@ -203,4 +203,6 @@ $login = new Loggin('username', 'password');
 new GeneralLogger($login);
 
 $login->handle();
+$login->handle();
+$login->handle();
 
