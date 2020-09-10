@@ -16,10 +16,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 | которые его используют.
 */
 
-use App\Strategy\Seminar;
-use App\Strategy\Lecture;
-use App\Strategy\TimedCostStrategy;
-use App\Strategy\FixedCostStrategy;
+use App\Strategy\{
+    Seminar,
+    Lecture,
+    TimedCostStrategy,
+    FixedCostStrategy
+};
 
 echo '<b>Strategy</b><br>';
 
@@ -83,8 +85,10 @@ echo $app->preferences->printPropertyValue('max-connections') . "<br>";
 | специально предназначенному для этого общему механизму.
 */
 
-use App\DependencyInjection\PreferencesRepository;
-use App\DependencyInjection\Models\Preferences as PreferencesInjection;
+use App\DependencyInjection\{
+    PreferencesRepository,
+    Models\Preferences as PreferencesInjection,
+};
 
 echo '<br><b>Dependency injection</b><br>';
 
@@ -107,8 +111,10 @@ echo $preferencesRepository->printPropertyValue('max-connections') . "<br>";
 | Компоновщик позволяет клиентам обращаться к отдельным объектам и к группам объектов одинаково.
 */
 
-use App\Composite\Chair;
-use App\Composite\ChairBox;
+use App\Composite\{
+    Chair,
+    ChairBox,
+};
 
 echo '<br><b>Composite</b><br>';
 
@@ -140,11 +146,13 @@ echo $chairBox->printWeight() . "<br>";
 | Шаблон Декоратор предоставляет гибкую альтернативу практике создания подклассов с целью расширения функциональности.
 */
 
-use App\Decorator\Helpers\RequestHelper;
-use App\Decorator\Middleware\LogRequest;
-use App\Decorator\Middleware\AuthenticateRequest;
-use App\Decorator\Middleware\StructureRequest;
-use App\Decorator\MainProcess;
+use App\Decorator\{
+    Helpers\RequestHelper,
+    Middleware\LogRequest,
+    Middleware\AuthenticateRequest,
+    Middleware\StructureRequest,
+    MainProcess,
+};
 
 echo '<br><b>Decorator</b>';
 
@@ -206,3 +214,28 @@ $login->handle();
 $login->handle();
 $login->handle();
 
+/*
+|--------------------------------------------------------------------------
+| Visitor
+|--------------------------------------------------------------------------
+| Посетитель (англ. visitor) — поведенческий шаблон проектирования,
+| описывающий операцию, которая выполняется над объектами других классов.
+| При изменении visitor нет необходимости изменять обслуживаемые классы.
+*/
+
+use App\Visitor\{
+    Reports\ReportTypeA,
+    Requests,
+    Tenders,
+};
+
+echo '<br><b>Visitor</b><br>';
+
+$requests = new Requests;
+$tenders = new Tenders;
+
+$reportTypeA = new ReportTypeA();
+
+$requests->acceptReport($reportTypeA);
+echo '<br>';
+$tenders->acceptReport($reportTypeA);
