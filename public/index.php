@@ -239,3 +239,37 @@ $reportTypeA = new ReportTypeA();
 $requests->acceptReport($reportTypeA);
 echo '<br>';
 $tenders->acceptReport($reportTypeA);
+
+/*
+|--------------------------------------------------------------------------
+| Command
+|--------------------------------------------------------------------------
+| Команда (англ. Command) — поведенческий шаблон проектирования,
+| используемый при объектно-ориентированном программировании,
+| представляющий действие. Объект команды заключает в себе само действие и его параметры.
+*/
+
+use App\Command\{
+    Controller,
+    Commands\AuthCommand,
+};
+
+echo '<br><b>Command</b><br>';
+
+$controller = new Controller;
+
+$context = $controller->getContext();
+
+$context->set('action', 'auth');
+$context->set('type', AuthCommand::TYPE_LOGIN);
+$context->set('login', 'Billy');
+$context->set('password', 'very_strong_password');
+
+$controller->process();
+
+echo '<br>';
+
+$context->set('type', AuthCommand::TYPE_LOGOUT);
+$context->set('login', 'Billy');
+
+$controller->process();
