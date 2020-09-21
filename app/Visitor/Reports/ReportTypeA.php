@@ -14,14 +14,14 @@ class ReportTypeA extends ReportVisitor
     {
         echo 'Отчет раздела ' . $entity->getBookName() . '<br>';
         echo 'Всего заявок: ' . $entity->getTotalRowsCount() . '<br>';
-        echo $entity->printRows() . '<br>';
+        echo $entity->printRows();
     }
 
     public function visitTendersAndReport(Tenders $entity): void
     {
         echo 'Отчет раздела ' . $entity->getBookName() . '<br>';
         echo 'Всего тендеров: ' . $entity->getTotalRowsCount() . '<br>';
-        echo $entity->printRows() . '<br>';
+        echo $entity->printRows();
     }
 
 }
