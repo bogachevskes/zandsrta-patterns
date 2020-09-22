@@ -31,4 +31,5 @@ class CommandContext
     {
         return $this->errors;
     }
+
 }
