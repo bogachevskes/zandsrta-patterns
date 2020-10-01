@@ -273,3 +273,34 @@ $context->set('type', AuthCommand::TYPE_LOGOUT);
 $context->set('login', 'Billy');
 
 $controller->process();
+
+/*
+|--------------------------------------------------------------------------
+| Null Object
+|--------------------------------------------------------------------------
+| В объектно-ориентированном программировании Null Object — это объект с определенным нейтральным («null») поведением.
+| Шаблон проектирования Null Object описывает использование таких объектов и их поведение (или отсутствие такового).
+*/
+
+use App\NullObject\{
+    Base\Entity,
+    CombinedEntity
+};
+
+echo '<br><b>Null Object</b><br>';
+
+$entity = new CombinedEntity(123789, 'Jordan', new Entity(123167, 'Nadine'));
+
+
+
+$nullEntity = new CombinedEntity;
+
+$entities = [
+    $entity,
+    $nullEntity,
+];
+
+foreach ($entities as $object) {
+    echo 'Имя сущности: ' . $object->getName() .  '<br>';
+    echo 'Имя вложенной сущности: ' . $object->getSubEntityName() . '<br>';
+}
