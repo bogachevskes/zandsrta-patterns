@@ -291,8 +291,6 @@ echo '<br><b>Null Object</b><br>';
 
 $entity = new CombinedEntity(123789, 'Jordan', new Entity(123167, 'Nadine'));
 
-
-
 $nullEntity = new CombinedEntity;
 
 $entities = [
